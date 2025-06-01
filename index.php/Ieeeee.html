@@ -1,0 +1,2231 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neris Indústrias</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
+    }
+
+    .header {
+      background-color: #000;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      height: 120px;
+      width: auto;
+      margin-left: 10px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .hero {
+      position: relative;
+      text-align: center;
+      color: #ffd700;
+      height: 800px;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.5);
+      z-index: 1;
+    }
+
+    .hero-text {
+      position: relative;
+      top: 55%;
+      transform: translateY(-50%);
+      font-size: 3rem;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 2px 2px 4px #000;
+      z-index: 2;
+    }
+
+    .sobre {
+      padding: 40px;
+      background-color: #1c1c1c;
+    }
+
+    .sobre h2 {
+      color: #ff0000;
+      text-align: center;
+    }
+
+    .sobre-box {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+
+    .sobre-img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .projetos {
+      padding: 60px 20px;
+      background-color: #222;
+    }
+
+    .projetos h2 {
+      text-align: center;
+      color: #ffff00;
+    }
+
+    .categorias {
+      text-align: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      border: 2px dashed red;
+      padding: 10px;
+    }
+
+    .tab-button {
+      background-color: #ff0000;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      margin: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .tab-button:hover {
+      background-color: #cc0000;
+    }
+
+    .aba-projeto {
+      background-color: #333;
+      padding: 30px;
+      border-radius: 10px;
+      margin: 40px auto;
+      max-width: 900px;
+    }
+
+    h3 {
+      color: #ffd700;
+    }
+
+    .projeto-img {
+      width: 100%;
+      max-height: 600px;
+      object-fit: contain;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    .progress-wrapper {
+      position: relative;
+      margin-bottom: 10px;
+    }
+
+    .custom-progress {
+      appearance: none;
+      width: 100%;
+      height: 20px;
+      background: #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .custom-progress::-webkit-progress-value,
+    .custom-progress::-moz-progress-bar {
+      background-color: red;
+    }
+
+    .input-wrapper {
+      margin: 10px 0;
+      display: none;
+    }
+
+    .admin .input-wrapper {
+      display: block;
+    }
+
+    @media screen and (max-width: 480px) {
+      .hero {
+        height: 600px;
+      }
+
+      .hero-text {
+        font-size: 2rem;
+      }
+
+      .logo {
+        height: 80px;
+      }
+
+      .sobre-box {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .sobre-img {
+        width: 100%;
+        height: auto;
+      }
+
+      .tab-button {
+        width: 100%;
+        margin: 10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img class="logo" src="Neris Indústries.png" alt="Logo Neris" />
+  </div>
+
+  <div class="hero">
+    <img class="hero-bg" src="Design sem nome.jpg" alt="Fundo Hero" />
+    <div class="hero-text">Bem vindo à Neris Indùstries</div>
+  </div>
+
+  <div class="sobre">
+    <h2>Sobre Nós</h2>
+    <div class="sobre-box">
+      <img class="sobre-img" src="ooooooooo.jpg" alt="Eletrônica" />
+      <p>Nosso objetivo é criar projetos de programação e eletrônica, mostrando que criatividade é o que conta.</p>
+    </div>
+    <div class="sobre-box">
+      <img class="sobre-img" src="iiiiiiicamaroooooooooo.jpg" alt="Drift" />
+      <p>Desenvolvemos e preparamos projetos automotivos como carros de drift e arrancada, além de ideias muito loucas.</p>
+    </div>
+  </div>
+
+  <div class="projetos">
+    <h2>Projetos</h2>
+    <div class="categorias">
+      <button class="tab-button" onclick="mostrarAba('automotivos')">Automotivos</button>
+      <button class="tab-button" onclick="mostrarAba('eletronica')">Eletrônicos</button>
+    </div>
+
+    <div id="automotivos" style="display:block;">
+      <div class="aba-projeto">
+        <h3>Camaro Kart</h3>
+        <progress id="progressoCamaroView" class="custom-progress" max="100" value="0"></progress>
+        <div class="input-wrapper">
+          <input type="range" id="progressoCamaroInput" min="0" max="100" />
+          <input type="file" onchange="trocarImagem(this, 'imagemCamaro')" />
+        </div>
+        <img id="imagemCamaro" class="projeto-img" src="" alt="Camaro Kart" />
+      </div>
+
+      <div class="aba-projeto">
+        <h3>Carrinho RC Drift</h3>
+        <progress id="progressoRCView" class="custom-progress" max="100" value="0"></progress>
+        <div class="input-wrapper">
+          <input type="range" id="progressoRCInput" min="0" max="100" />
+          <input type="file" onchange="trocarImagem(this, 'imagemRC')" />
+        </div>
+        <img id="imagemRC" class="projeto-img" src="" alt="RC Drift" />
+      </div>
+
+      <div class="aba-projeto">
+        <h3>Simulador de Corrida</h3>
+        <progress id="progressoSimView" class="custom-progress" max="100" value="0"></progress>
+        <div class="input-wrapper">
+          <input type="range" id="progressoSimInput" min="0" max="100" />
+          <input type="file" onchange="trocarImagem(this, 'imagemSim')" />
+        </div>
+        <img id="imagemSim" class="projeto-img" src="" alt="Simulador" />
+      </div>
+    </div>
+
+    <div id="eletronica" style="display:none;">
+      <div class="aba-projeto">
+        <h3>Armadura do Homem de Ferro (ESP32)</h3>
+        <progress id="progressoIronView" class="custom-progress" max="100" value="0"></progress>
+        <div class="input-wrapper">
+          <input type="range" id="progressoIronInput" min="0" max="100" />
+          <input type="file" onchange="trocarImagem(this, 'imagemIron')" />
+        </div>
+        <img id="imagemIron" class="projeto-img" src="" alt="Iron Suit" />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function mostrarAba(nome) {
+      document.getElementById('automotivos').style.display = 'none';
+      document.getElementById('eletronica').style.display = 'none';
+      document.getElementById(nome).style.display = 'block';
+    }
+
+    let aPress = 0;
+    window.addEventListener('keydown', function(e) {
+      if (e.key === 'a' || e.key === 'A') {
+        aPress++;
+        if (aPress >= 2) {
+          document.body.classList.toggle('admin');
+          aPress = 0;
+        }
+      } else {
+        aPress = 0;
+      }
+    });
+
+    function trocarImagem(input, idImg) {
+      const file = input.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const imgSrc = e.target.result;
+          document.getElementById(idImg).src = imgSrc;
+          localStorage.setItem(idImg + '_src', imgSrc);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function atualizarProgresso(idInput, idView) {
+      const input = document.getElementById(idInput);
+      const barra = document.getElementById(idView);
+      const salvo = localStorage.getItem(idInput);
+      if (salvo !== null) {
+        input.value = salvo;
+        barra.value = salvo;
+      }
+
+      input.addEventListener('input', () => {
+        barra.value = input.value;
+        localStorage.setItem(idInput, input.value);
+      });
+    }
+
+    window.onload = () => {
+      atualizarProgresso('progressoCamaroInput', 'progressoCamaroView');
+      atualizarProgresso('progressoIronInput', 'progressoIronView');
+      atualizarProgresso('progressoRCInput', 'progressoRCView');
+      atualizarProgresso('progressoSimInput', 'progressoSimView');
+
+      const imagens = ['imagemCamaro', 'imagemIron', 'imagemRC', 'imagemSim'];
+      imagens.forEach(id => {
+        const imgSalva = localStorage.getItem(id + '_src');
+        if (imgSalva) document.getElementById(id).src = imgSalva;
+      });
+    };
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
